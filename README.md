@@ -18,6 +18,22 @@ There are three modules in this application
 - Use command `mvn clean install` to build the project.
 - Use command `mvn spring-boot:run` from `employeeservImplementation` folder to run the project.
 - Use postman or curl to access `http://localhost:8080/v1/bfs/employees/{id}` GET endpoint. It will return an Employee resource.
+- For Creating an Employee `http://localhost:8080/v1/bfs/employees` POST endpoint with request body
+```json
+{
+	"first_name": "Sonali",
+	"last_name": "Hotwani",
+	"date_of_birth": "1995-08-05", //format: yyyy-MM-dd
+	"address": {
+		"line1": "addr 1",
+		"line2": "addr 2",
+		"city": "city",
+		"state": "state",
+		"country": "country",
+		"zip_code": "123456"
+	}
+}
+```
 
 ## Assignment
 enhance the existing project and see you complete the following requirements:
