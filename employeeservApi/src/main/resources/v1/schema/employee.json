@@ -22,7 +22,8 @@
     "date_of_birth": {
       "description": "date of birth",
       "type": "string",
-      "format": "date-time"
+      "format": "date-time",
+      "customPattern" : "yyyy-MM-dd"
     },
     "address": {
       "$ref": "address.json"

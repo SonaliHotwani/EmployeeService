@@ -10,5 +10,3 @@ spring:
     properties:
       hibernate:
         default_schema: ""
-  jackson:
-    date-format: yyyy-MM-dd

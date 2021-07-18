@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.net.URI;
@@ -109,10 +108,26 @@ public class EmployeeResourceImplIntegrationTest {
     public void shouldReturnInternalServerErrorForAnyUnhandledException() throws URISyntaxException {
 
         final String uri = "http://localhost:" + serverPort + "/v1/bfs/employees";
+        String requestString = "Any Random Text";
+        final ResponseEntity<String> response = restTemplate.postForEntity(new URI(uri), requestString, String.class);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        String expectedResponse = "{" +
+                "  \"message\": \"Internal Server Error\"" +
+                "}";
+        assertEquals(expectedResponse, response.getBody());
+    }
+
+    @Test
+    public void shouldReturnBadRequestForInvalidDateFormat() throws URISyntaxException {
+
+        final String uri = "http://localhost:" + serverPort + "/v1/bfs/employees";
+        final HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
         String requestString = "{" +
                 "\"first_name\": \"Sonali\"," +
                 "\"last_name\": \"Hotwani\"," +
-                "\"date_of_birth\": \"BadDateOfBirth\"," +
+                "\"date_of_birth\": \"01-01-2020\"," +
                 "\"address\": {" +
                 "\"line1\": \"addr 1\"," +
                 "\"line2\": \"addr 2\"," +
@@ -122,12 +137,13 @@ public class EmployeeResourceImplIntegrationTest {
                 "\"zip_code\": \"123456\"" +
                 "}" +
                 "}";
-        final ResponseEntity<String> response = restTemplate.postForEntity(new URI(uri), requestString, String.class);
+        HttpEntity<String> request =
+                new HttpEntity<>(requestString, headers);
+        final ResponseEntity<String> response = restTemplate.postForEntity(new URI(uri), request, String.class);
 
-        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
-        String expectedResponse = "{" +
-                "  \"message\": \"Internal Server Error\"" +
-                "}";
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
+        String expectedResponse = "{  \"message\": \"Cannot deserialize value of type `java.util.Date` from String \"01-01-2020\": not a valid representation (error: Failed to parse Date value '01-01-2020': Cannot parse date \"01-01-2020\": not compatible with any of standard forms (\"yyyy-MM-dd'T'HH:mm:ss.SSSZ\", \"yyyy-MM-dd'T'HH:mm:ss.SSS\", \"EEE, dd MMM yyyy HH:mm:ss zzz\", \"yyyy-MM-dd\"))\n" +
+                " at [Source: (PushbackInputStream); line: 1, column: 65] (through reference chain: com.paypal.bfs.test.employeeserv.api.model.CreateEmployeeRequest[\"date_of_birth\"])\"}";
         assertEquals(expectedResponse, response.getBody());
     }
 }

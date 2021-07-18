@@ -3,6 +3,7 @@ package com.paypal.bfs.test.employeeserv.impl;
 import com.paypal.bfs.test.employeeserv.exception.EmployeeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,14 @@ public class EmployeeResponseEntityExceptionHandler {
         return ResponseEntity.badRequest().body(
                         "{" +
                         "  \"message\": \"" + message + "\"" +
+                        "}");
+    }
+
+    @ExceptionHandler(value = {HttpMessageNotReadableException.class})
+    protected ResponseEntity<Object> handle(HttpMessageNotReadableException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        "{" +
+                        "  \"message\": \"" + ex.getCause().getMessage() + "\"" +
                         "}");
     }
 
