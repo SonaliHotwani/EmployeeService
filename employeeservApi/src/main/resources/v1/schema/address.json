@@ -3,23 +3,32 @@
   "properties": {
     "line1": {
       "description": "Line 1",
-      "type": "string"
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 255
     },
     "line2": {
       "description": "Line 2",
-      "type": "string"
+      "type": "string",
+      "maxLength": 255
     },
     "city": {
       "description": "City",
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100
     },
     "state": {
       "description": "State",
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100
     },
     "country": {
       "description": "Country",
-      "type": "string"
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 100
     },
     "zip_code": {
       "description": "Zip Code",
