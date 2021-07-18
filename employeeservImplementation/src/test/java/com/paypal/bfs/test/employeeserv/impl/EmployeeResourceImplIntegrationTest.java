@@ -104,4 +104,30 @@ public class EmployeeResourceImplIntegrationTest {
                 "}";
         assertEquals(expectedResponse, response.getBody());
     }
+
+    @Test
+    public void shouldReturnInternalServerErrorForAnyUnhandledException() throws URISyntaxException {
+
+        final String uri = "http://localhost:" + serverPort + "/v1/bfs/employees";
+        String requestString = "{" +
+                "\"first_name\": \"Sonali\"," +
+                "\"last_name\": \"Hotwani\"," +
+                "\"date_of_birth\": \"BadDateOfBirth\"," +
+                "\"address\": {" +
+                "\"line1\": \"addr 1\"," +
+                "\"line2\": \"addr 2\"," +
+                "\"city\": \"city\"," +
+                "\"state\": \"state\"," +
+                "\"country\": \"country\"," +
+                "\"zip_code\": \"123456\"" +
+                "}" +
+                "}";
+        final ResponseEntity<String> response = restTemplate.postForEntity(new URI(uri), requestString, String.class);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+        String expectedResponse = "{" +
+                "  \"message\": \"Internal Server Error\"" +
+                "}";
+        assertEquals(expectedResponse, response.getBody());
+    }
 }
