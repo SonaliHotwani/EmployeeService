@@ -1,5 +1,6 @@
 package com.paypal.bfs.test.employeeserv.impl;
 
+import com.paypal.bfs.test.employeeserv.exception.EmployeeNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -26,6 +27,22 @@ public class EmployeeResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
                         "{" +
                         "  \"message\": \"Internal Server Error\"" +
+                        "}");
+    }
+
+    @ExceptionHandler(value = {EmployeeNotFoundException.class})
+    protected ResponseEntity<Object> handle(EmployeeNotFoundException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+                        "{" +
+                        "  \"message\": \"" + ex.getMessage() + "\"" +
+                        "}");
+    }
+
+    @ExceptionHandler(value = {NumberFormatException.class})
+    protected ResponseEntity<Object> handle(NumberFormatException ex, WebRequest request) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(
+                        "{" +
+                        "  \"message\": \"Employee Id must be a numeric value\"" +
                         "}");
     }
 }
