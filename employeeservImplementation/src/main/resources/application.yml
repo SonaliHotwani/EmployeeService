@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:mem:db
+    hikari:
+      maximum-pool-size: 2
+      pool-name: test-connection-pool
+  jpa:
+    show-sql: true
+    properties:
+      hibernate:
+        default_schema: ""
+  jackson:
+    date-format: yyyy-MM-dd

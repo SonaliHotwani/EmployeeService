@@ -1,8 +1,11 @@
 package com.paypal.bfs.test.employeeserv.api;
 
+import com.paypal.bfs.test.employeeserv.api.model.CreateEmployeeRequest;
 import com.paypal.bfs.test.employeeserv.api.model.Employee;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -19,7 +22,6 @@ public interface EmployeeResource {
     @RequestMapping("/v1/bfs/employees/{id}")
     ResponseEntity<Employee> employeeGetById(@PathVariable("id") String id);
 
-    // ----------------------------------------------------------
-    // TODO - add a new operation for creating employee resource.
-    // ----------------------------------------------------------
+    @PostMapping("/v1/bfs/employees")
+    ResponseEntity<Employee> createEmployee(@RequestBody CreateEmployeeRequest createEmployeeRequest);
 }

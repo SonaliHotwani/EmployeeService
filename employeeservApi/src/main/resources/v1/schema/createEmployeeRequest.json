@@ -3,10 +3,6 @@
   "description": "Employee resource object",
   "type": "object",
   "properties": {
-    "id": {
-      "description": "employee id",
-      "type": "integer"
-    },
     "first_name": {
       "description": "first name",
       "type": "string",

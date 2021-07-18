@@ -55,7 +55,9 @@
                     <sourceDirectory>${project.basedir}/src/main/resources/v1/schema</sourceDirectory>
                     <targetPackage>com.paypal.bfs.test.employeeserv.api.model</targetPackage>
                     <useCommonsLang3>true</useCommonsLang3>
-                    <includeHashcodeAndEquals>false</includeHashcodeAndEquals>
+                    <includeHashcodeAndEquals>true</includeHashcodeAndEquals>
+                    <includeJsr303Annotations>true</includeJsr303Annotations>
+                    <inclusionLevel>NON_ABSENT</inclusionLevel>
                 </configuration>
                 <executions>
                     <execution>

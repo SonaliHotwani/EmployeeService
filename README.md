@@ -17,10 +17,10 @@ There are three modules in this application
 - Please have Maven version `3.3.3` & Java 8 on your system.
 - Use command `mvn clean install` to build the project.
 - Use command `mvn spring-boot:run` from `employeeservImplementation` folder to run the project.
-- Use postman or curl to access `http://localhost:8080/v1/bfs/employees/1` GET endpoint. It will return an Employee resource.
+- Use postman or curl to access `http://localhost:8080/v1/bfs/employees/{id}` GET endpoint. It will return an Employee resource.
 
 ## Assignment
-We would like you to enhance the existing project and see you complete the following requirements:
+enhance the existing project and see you complete the following requirements:
 
 - `employee.json` has only `name`, and `id` elements. Please add `date of birth` and `address` elements to the `Employee` resource. Address will have `line1`, `line2`, `city`, `state`, `country` and `zip_code` elements. `line2` is an optional element.
 - Add one more operation in `EmployeeResource` to create an employee. `EmployeeResource` will have two operations, one to create, and another to retrieve the employee resource.
@@ -33,3 +33,8 @@ We would like you to enhance the existing project and see you complete the follo
 
 ## Assignment submission
 Thank you very much for your time to take this test. Please upload this complete solution in Github and send us the link to `bfs-sor-interview@paypal.com`.
+
+## Reasons
+
+- Used different entity object for persisting data. The persistence layer can change depending on the database we choose. It is better to keep entity object and api layer separate.
+- Currently, I have flattened address in entity. I did not feel the use of a separate address entity because there is a one-to-one relation between employee and address, as per use case a separate entity can also be created.
