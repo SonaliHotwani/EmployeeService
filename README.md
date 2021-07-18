@@ -54,3 +54,9 @@ Thank you very much for your time to take this test. Please upload this complete
 
 - Used different entity object for persisting data. The persistence layer can change depending on the database we choose. It is better to keep entity object and api layer separate.
 - Currently, I have flattened address in entity. I did not feel the use of a separate address entity because there is a one-to-one relation between employee and address, as per use case a separate entity can also be created.
+
+##References
+- [jsonschema2pojo Plugin](https://github.com/joelittlejohn/jsonschema2pojo)
+- [JsonSchemaPojo Properties](https://joelittlejohn.github.io/jsonschema2pojo/site/1.1.1/generate-mojo.html#dateType)
+- [JsonSchemaPojo Reference](https://github.com/joelittlejohn/jsonschema2pojo/wiki/Reference)
+- [Understanding Json Schema](http://json-schema.org/understanding-json-schema/structuring.html)
