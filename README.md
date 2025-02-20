@@ -34,29 +34,3 @@ There are three modules in this application
 	}
 }
 ```
-
-## Assignment
-enhance the existing project and see you complete the following requirements:
-
-- `employee.json` has only `name`, and `id` elements. Please add `date of birth` and `address` elements to the `Employee` resource. Address will have `line1`, `line2`, `city`, `state`, `country` and `zip_code` elements. `line2` is an optional element.
-- Add one more operation in `EmployeeResource` to create an employee. `EmployeeResource` will have two operations, one to create, and another to retrieve the employee resource.
-- Implement create and retrieve operations in `EmployeeResourceImpl.java`.
-- Resource created using create endpoint should be retrieved using retrieve/get endpoint.
-- Please use h2 in-memory database or any other in-memory database to persist the `Employee` resource. Dependency for h2 in-memory database is already added to the parent pom.
-- Please make sure the validations are done for the requests.
-- Response codes are as per rest guidelines.
-- Error handling in case of failures.
-
-## Assignment submission
-Thank you very much for your time to take this test. Please upload this complete solution in Github and send us the link to `bfs-sor-interview@paypal.com`.
-
-## Reasons
-
-- Used different entity object for persisting data. The persistence layer can change depending on the database we choose. It is better to keep entity object and api layer separate.
-- Currently, I have flattened address in entity. I did not feel the use of a separate address entity because there is a one-to-one relation between employee and address, as per use case a separate entity can also be created.
-
-##References
-- [jsonschema2pojo Plugin](https://github.com/joelittlejohn/jsonschema2pojo)
-- [JsonSchemaPojo Properties](https://joelittlejohn.github.io/jsonschema2pojo/site/1.1.1/generate-mojo.html#dateType)
-- [JsonSchemaPojo Reference](https://github.com/joelittlejohn/jsonschema2pojo/wiki/Reference)
-- [Understanding Json Schema](http://json-schema.org/understanding-json-schema/structuring.html)
